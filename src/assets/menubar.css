@@ -1,0 +1,390 @@
+/* Icons for menu items */
+.archive {
+    background: url('icons/archive.png') no-repeat center center;
+}
+
+.archdocument {
+    background: url('icons/archdocument.png') no-repeat center center;
+}
+
+.assembly {
+    background: url('icons/assembly.png') no-repeat center center;
+}
+
+.communicate {
+    background: url('icons/communicate.png') no-repeat center center;
+}
+
+.complect {
+    background: url('icons/complect.png') no-repeat center center;
+}
+
+.complex {
+    background: url('icons/complex.png') no-repeat center center;
+}
+
+.delivery {
+    background: url('icons/delivery.png') no-repeat center center;
+}
+
+.detail {
+    background: url('icons/detail.png') no-repeat center center;
+}
+
+.document {
+    background: url('icons/document.png') no-repeat center center;
+}
+
+.documentation {
+    background: url('icons/documentation.png') no-repeat center center;
+}
+
+.equipment {
+    background: url('icons/equipment.png') no-repeat center center;
+}
+
+.exemplar {
+    background: url('icons/exemplar.png') no-repeat center center;
+}
+
+.help {
+    background: url('icons/help.png') no-repeat center center;
+}
+
+.homelink {
+    background: url('icons/home.png') no-repeat center center;
+}
+
+.incident {
+    background: url('icons/incident.png') no-repeat center center;
+}
+
+.material {
+    background: url('icons/material.png') no-repeat center center;
+}
+
+.mdm {
+    background: url('icons/mdm.png') no-repeat center center;
+}
+
+.other {
+    background: url('icons/other.png') no-repeat center center;
+}
+
+.order {
+    background: url('icons/prodorder.png') no-repeat center center;
+}
+
+.ordermaker {
+    background: url('icons/ordermaker.png') no-repeat center center;
+}
+
+.partobject {
+    background: url('icons/partobject.png') no-repeat center center;
+}
+
+.prefix {
+    background: url('icons/prefix.png') no-repeat center center;
+}
+
+.prodorder {
+    background: url('icons/prodorder.png') no-repeat center center;
+}
+
+.prodorderlist {
+    background: url('icons/prodorderlist.png') no-repeat center center;
+}
+
+.prodspec {
+    background: url('icons/prodspec.png') no-repeat center center;
+}
+
+.rawrow {
+    background: url('icons/rawrow.png') no-repeat center center;
+}
+
+.report {
+    background: url('icons/report.png') no-repeat center center;
+}
+
+.reportgroup {
+    background: url('icons/reportgroup.png') no-repeat center center;
+}
+
+.settings {
+    background: url('icons/settings.png') no-repeat center center;
+}
+
+.stage {
+    background: url('icons/stage.png') no-repeat center center;
+}
+
+.standart {
+    background: url('icons/standart.png') no-repeat center center;
+}
+
+.tare {
+    background: url('icons/tare.png') no-repeat center center;
+}
+
+.time {
+    background: url('icons/time.png') no-repeat center center;
+}
+
+.user {
+    background: url('icons/user.png') no-repeat center center;
+}
+
+.about {
+    background: url('icons/about.png') no-repeat center center;
+}
+
+.chain {
+    background: url('icons/chain.png') no-repeat center center;
+}
+
+.designer {
+    background: url('icons/designer.png') no-repeat center center;
+}
+
+.device {
+    background: url('icons/device.png') no-repeat center center;
+}
+
+.export {
+    background: url('icons/export.png') no-repeat center center;
+}
+
+.form {
+    background: url('icons/form.png') no-repeat center center;
+}
+
+.classification {
+    background: url('icons/group.png') no-repeat center center;
+}
+
+.import {
+    background: url('icons/import.png') no-repeat center center;
+}
+
+.item {
+    background: url('icons/item.png') no-repeat center center;
+}
+
+.letter {
+    background: url('icons/letter.png') no-repeat center center;
+}
+
+.logout {
+    background: url('icons/logout.png') no-repeat center center;
+}
+
+.manage {
+    background: url('icons/manage.png') no-repeat center center;
+}
+
+.name {
+    background: url('icons/name.png') no-repeat center center;
+}
+
+.notice {
+    background: url('icons/notice.png') no-repeat center center;
+}
+
+.operation {
+    background: url('icons/operation.png') no-repeat center center;
+}
+
+.person {
+    background: url('icons/person.png') no-repeat center center;
+}
+
+.place {
+    background: url('icons/place.png') no-repeat center center;
+}
+
+.plan {
+    background: url('icons/plan.png') no-repeat center center;
+}
+
+.process {
+    background: url('icons/process.png') no-repeat center center;
+}
+
+.processing {
+    background: url('icons/processing.png') no-repeat center center;
+}
+
+.production {
+    background: url('icons/production.png') no-repeat center center;
+}
+
+.property {
+    background: url('icons/property.png') no-repeat center center;
+}
+
+.reference {
+    background: url('icons/reference.png') no-repeat center center;
+}
+
+.tpresource {
+    background: url('icons/resource.png') no-repeat center center;
+}
+
+.request {
+    background: url('icons/request.png') no-repeat center center;
+}
+
+.rigging {
+    background: url('icons/rigging.png') no-repeat center center;
+}
+
+.role {
+    background: url('icons/role.png') no-repeat center center;
+}
+
+.route {
+    background: url('icons/route.png') no-repeat center center;
+}
+
+.routepoint {
+    background: url('icons/routepoint.png') no-repeat center center;
+}
+
+.search {
+    background: url('icons/search.png') no-repeat center center;
+}
+
+.select {
+    background: url('icons/select.png') no-repeat center center;
+}
+
+.service {
+    background: url('icons/service.png') no-repeat center center;
+}
+
+.sortament {
+    background: url('icons/sortament.png') no-repeat center center;
+}
+
+.staff {
+    background: url('icons/staff.png') no-repeat center center;
+}
+
+.subassembly {
+    background: url('icons/subassembly.png') no-repeat center center;
+}
+
+.supply {
+    background: url('icons/supply.png') no-repeat center center;
+}
+
+.supplyorder {
+    background: url('icons/supplyorder.png') no-repeat center center;
+}
+
+.supplier {
+    background: url('icons/supplier.png') no-repeat center center;
+}
+
+.tarif_net {
+    background: url('icons/tarif_net.png') no-repeat center center;
+}
+
+.task {
+    background: url('icons/task.png') no-repeat center center;
+}
+
+.tool {
+    background: url('icons/tool.png') no-repeat center center;
+}
+
+.treasure {
+    background: url('icons/treasure.png') no-repeat center center;
+}
+
+.type {
+    background: url('icons/type.png') no-repeat center center;
+}
+
+.unit {
+    background: url('icons/unit.png') no-repeat center center;
+}
+
+.update {
+    background: url('icons/update.png') no-repeat center center;
+}
+
+.upload {
+    background: url('icons/upload.png') no-repeat center center;
+}
+
+.userprofile {
+    background: url('icons/userprofile.png') no-repeat center center;
+}
+
+.waybill {
+    background: url('icons/waybill.png') no-repeat center center;
+}
+
+.worker {
+    background: url('icons/worker.png') no-repeat center center;
+}
+
+.edit_bas {
+    background: url('icons/edit.png') no-repeat center center;
+}
+
+.delete_bas {
+    background: url('icons/delete.png') no-repeat center center;
+}
+
+.save_bas {
+    background: url('icons/save.png') no-repeat center center;
+}
+
+.cancel_bas {
+    background: url('icons/cancel.png') no-repeat center center;
+}
+
+.storeplace {
+    background: url('icons/storeplace.png') no-repeat center center;
+}
+
+.menuitem {
+    background: url('icons/menuitem.png') no-repeat center center;
+}
+
+.npa {
+    background: url('icons/npa.png') no-repeat center center;
+}
+
+.redaction {
+    background: url('icons/redaction.png') no-repeat center center;
+}
+
+.oiv {
+    background: url('icons/oiv.png') no-repeat center center;
+}
+
+.toolclass {
+    background: url('icons/toolclass.png') no-repeat center center;
+}
+
+.file {
+    background: url('icons/file.png') no-repeat center center;
+}
+
+/* Дополнительные стили Базальта */
+.state_no {
+	background:url('icons/state_no.png') no-repeat center center;
+}
+.state_ordered {
+	background:url('icons/state_ordered.png') no-repeat center center;
+}
+.state_yes {
+	background:url('icons/state_yes.png') no-repeat center center;
+}
+.state_empty {
+	background:url('icons/state_empty.png') no-repeat center center;
+}

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <title>Платформа Базальта</title>
+    <script type="text/javascript">
+    // Передача параметров страницы
+    // Сборочная единица
+    // panels = ['center', 'edit', 'staffratio', 'staffsame', 'staffcompare', 'east', 'staffinto', 'objectfiles', 'designroles', 'objectfilessimple'];
+    // epanels = ['designroles', 'edit', 'staffratio', 'objectfiles', 'objectfilessimple'];
+    // caption = "Тестовая сбока Платформа | Сборочная единица";
+    // type_key = "partobject";
+    // sub_type_key = "assembly";
+    // object_id = "30";
+    // show_staff_through = true;
+
+    // Сборочные единицы
+    // panels = ['filters', 'classification', 'west', 'center', 'objectlist', 'create', 'east', 'historylog', 'propertiesview'];
+    // epanels= ['create'];
+    // type_key = "partobject";
+    // sub_type_key = "assembly";
+    // filter_fields = ['date']
+
+    // Деталь
+    panels = ['center', 'edit', 'picturecarousel', 'east']; // 'staffinto', 'objectfiles', 'historylog'
+    epanels = ['edit', 'picturecarousel'];
+    caption = "Тест 2 | Деталь";
+    type_key = "partobject";
+    sub_type_key = "detail";
+    object_id = "12";
+
+    // Детали
+    // panels = ['filters', 'west', 'classification', 'center', 'objectlist', 'create', 'east', 'objectfileslist'];
+    // epanels = ['create'];
+    // type_key = "partobject";
+    // sub_type_key = "detail";
+
+    // Стандартное изделие
+    // panels = ['filters', 'west', 'center', 'objectlist', 'east', 'objectfileslist'];
+    // panels = ['center', 'edit', 'east', 'picturecarousel']; // , 'supplyprices', 'soundsamelist'
+    // epanels = ['supplyprices', 'picturecarousel'];
+    // type_key = "partobject";
+    // sub_type_key = "standart";
+    // object_id = "38";
+    // caption = "Болт M20x50-8.8-GalZn DIN 933 | Стандартное изделие";
+
+    // Свойства производственного заказа
+    // panels = ['edit', 'center', 'prodordertree', 'east', 'picturepanel', 'objectfilessimple'];
+    // epanels = ['edit', 'prodordertree', 'picturepanel', 'objectfilessimple']
+    // type_key = "prodorder";
+    // object_id = "48";
+
+    // Заказ
+    // panels = ['center', 'edit', 'stafftree', 'east', 'orderfiles'];
+    // epanels = ['edit', 'orderfiles']
+    // type_key = "partobject";
+    // sub_type_key = "order";
+    // object_id = "37";
+    // order_id = "37";
+
+    // Экземпляр сортамента
+    // panels = ['edit', 'center', 'east', 'typesizesort', 'typesizemater'];
+    // // panels = ['main_menu', 'create', 'center', 'objectlist', 'east', 'propertiesview', 'historylog', 'typesizesort'];
+    // epanels = ['edit', 'typesizesort', 'typesizemater']
+    // type_key = "partobject";
+    // sub_type_key = "exemplar";
+    // object_id = "42";
+
+    // Классификационные группы
+    // panels = ['create', 'center', 'classificationlist', 'east', 'historylog', 'filters', 'west', 'classificationstaff'];
+    // epanels = ['create'];
+    // type_key = "classification";
+
+    // Классификационная группа
+    // panels = ['main_menu', 'edit', 'center', 'east', 'historylog', 'classificationstaff'];
+    // epanels = ['edit'];
+    // type_key = "classification";
+    // object_id = "33";
+
+    // Производственные заказы
+    // panels = ['filters', 'classification', 'west', 'center', 'prodorderslist', 'create', 'east', 'propertiesview'];
+    // epanels= [];
+    // type_key = 'prodorder';
+
+    // Список материалов
+    // panels = ['main_menu', 'west', 'filters', 'classification', 'center', 'objectlistcode', 'east', 'historylog', 'propertiesview'];
+    // epanels = [];
+    // type_key = "partobject";
+    // sub_type_key = "material";
+
+    // Материал
+    // panels = ['center', 'edit', 'east', 'exemplarslist', 'objectfiles'];
+    // epanels = ['edit', 'objectfiles'];
+    // type_key = "partobject";
+    // sub_type_key = "material";
+    // object_id = "43";
+
+    // Список производственных подразделений
+    // panels = ['west', 'filters', 'center', 'placelist', 'create', 'east', 'historylog', 'propertiesview'];
+    // epanels = [];
+    // type_key = "place";
+  
+    // Производственное подразделение
+    // panels = ['center', 'edit', 'east', 'historylog'];
+    // epanels = ['edit']
+    // type_key = "place";
+    // object_id = 55;
+
+    // Список операций
+    // panels = ['main_menu', 'west', 'filters', 'classification', 'center', 'operationlist', 'create', 'east', 'historylog', 'propertiesview'];
+    // epanels = ['create',];
+    // type_key = "operation";
+    // object_id = 4; // Идентификатор операции
+
+    // Извещения
+    // panels = ['filters', 'west', 'noticelist', 'center', 'create'];
+    // epanels = ['create'];
+    // type_key = "notice";
+    // filter_fields =['filter_date']
+
+    // Извещение
+    // panels = ['edit', 'center', 'noticelinks', 'extralinks', 'noticerecipients', 'noticefileversions', 'east'];
+    // epanels = ['edit', 'noticelinks'];
+    // type_key = "notice";
+    // caption = "22334455 | Извещение об изменениях";
+    // object_id = 39;
+
+    // Разработчики
+    // panels = ['filters', 'west', 'designerlist', 'center', 'create'];
+    // type_key = "designer";
+
+    // Задания
+    // panels = ['filters', 'west', 'tasklist', 'center', 'create', 'east', 'taskrefer'];
+    // epanels = ['create', 'taskrefer'];
+    // type_key = "task";
+
+    // Задание
+    // panels = ['center', 'edit', 'east', 'taskuser', 'taskrefer'];
+    // type_key = "task";
+    // object_id = 11;
+
+    // Дополнительные свойства
+    // panels = ['filters', 'west', 'propertieslist', 'center', 'create'];
+    // type_key = "property";
+
+    // Архивные документы
+    // panels = ['filters', 'west', 'arcdocumentslist', 'center', 'create', 'east', 'staffinto'];
+    // type_key = "arcdocument";
+
+    // Архивный документ
+    // panels = ['center', 'edit', 'east', 'arcdocumentobjects'];
+    // type_key = "arcdocument";
+    // object_id = 24;
+
+    // Список инцидентов
+    // panels = ['main_menu', 'west', 'filters', 'center', 'incidentslist', 'create', 'east', 'historylog', 'objectfiles'];
+    // type_key = "incident";
+
+    // Инцидент
+    // panels = ['main_menu', 'center', 'edit', 'east', 'objectfiles'];
+    // type_key = "incident";
+    // object_id = 13;
+
+    // Список писем
+    // panels = ['main_menu', 'west', 'filters', 'center', 'letterslist', 'create'];
+    // epanels = ['create'];
+    // type_key = "letter";
+    
+    // Заказы на поставку
+    // panels = ['main_menu', 'west', 'filters', 'center', 'supplyorderslist', 'create'];
+    // epanels = ['create'];
+    // type_key = "supplyorder";
+
+    // Загрузки файлов
+    // panels = ['main_menu', 'west', 'filters', 'center', 'fileuploadslist', 'create'];
+    // epanels = ['create'];
+    // type_key = "fileupload";
+
+    // Загрузка файлов
+    // panels = ['main_menu', 'center', 'edit', 'east', 'uploadarcdocs'];
+    // epanels = [];
+    // type_key = "fileupload";
+    // object_id = 1;
+
+    // Префиксы
+    // panels = ['main_menu', 'west', 'filters', 'center', 'codeprefixeslist', 'create'];
+    // epanels = ['create'];
+    // type_key = "codeprefix";
+
+    // Роли
+    // panels = ['create', 'center', 'filters', 'west', 'roleslist'];
+	  // epanels = ['create'];
+	  // type_key = "role";
+		// caption = "Роли";
+
+    // Единицы измерения
+    // panels = ['create', 'center', 'filters', 'west', 'measureunitslist'];
+	  // epanels = ['create'];
+	  // type_key = "measureunit";
+		// caption = "Единицы измерения";
+
+    // Типы документов
+    // panels = ['create', 'center', 'filters', 'west', 'documenttypeslist'];
+	  // epanels = ['create'];
+	  // type_key = "documenttype";
+		// caption = "Типы документов";
+
+    username = "admin";
+    session_datetime = "5 февраля 2021 г. 20:22";
+    user_session_id = 14;
+    </script>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but test doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>

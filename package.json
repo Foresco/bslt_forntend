@@ -1,0 +1,26 @@
+{
+  "name": "basalta",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "axios": "^0.21.4",
+    "vue": "^2.7.8",
+    "vuepress": "^1.9.8",
+    "vuex": "^3.6.2",
+    "vx-easyui": "^1.2.57"
+  },
+  "devDependencies": {
+    "@vue/cli-service": "^5.0.8",
+    "@vuepress/plugin-google-analytics": "^1.8.2",
+    "vue-template-compiler": "^2.6.14"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
