@@ -13,13 +13,32 @@
       <LinkButton iconCls="icon-add" @click="onCreateClick">Создать</LinkButton>
     </form>
     <div v-show="parent_code" class="parent_link">
-      Базовое исполнение: <a :href="parent_href" target="_blank">{{ parent_code }}</a>
+      Базовое исполнение:
+      <a :href="parent_href" target="_blank">{{ parent_code }}</a>
     </div>
     <div>
-      <DataGrid :data="list_data" :columnResizing="true" @rowDblClick="onRowDblClick($event)">
+      <DataGrid
+        :data="list_data"
+        :columnResizing="true"
+        @rowDblClick="onRowDblClick($event)"
+        selectionMode="single"
+        @rowSelect="onRowSelect($event)"
+      >
         <GridColumn field="rendition" title="Исполнение"></GridColumn>
         <GridColumn field="tail" title="Приращение" width="80px"></GridColumn>
       </DataGrid>
+    </div>
+    <div
+      class="buttons_bar"
+      v-if="checkEdit('renditions')"
+      v-show="rendition_id"
+    >
+      <LinkButton
+        iconCls="icon-no"
+        style="margin: 10px"
+        @click="onDeleteClick()"
+        >Удалить связь</LinkButton
+      >
     </div>
   </div>
 </template>
@@ -41,8 +60,9 @@ export default {
       }, // Информация о новом элементе состава
       tails: [], // Список приращений
       used_tails: [], // Список уже использованных приращений
-      parent_href: '', // Ссылка на родителя
-      parent_code: '' // Обозначение родителя
+      parent_href: "", // Ссылка на родителя
+      parent_code: "", // Обозначение родителя
+      rendition_id: null, // Идентификатор выделенного исполнения
     };
   },
   computed: mapState(["selected_id"]),
@@ -58,7 +78,9 @@ export default {
     },
     filterTails(response) {
       // Удаление использованных приращений
-      this.tails = response.filter((el) => !this.used_tails.includes(el.list_value));
+      this.tails = response.filter(
+        (el) => !this.used_tails.includes(el.list_value)
+      );
     },
     async loadRenditions() {
       this.list_data = []; // Очистка списка
@@ -69,10 +91,11 @@ export default {
       // Запоминать использованные приращения и далее убирать их из списка приращений
       this.list_data = res.map(this.parseRow);
       // Список возможных приращений
-      getListValues(this, "renditiontail").then(
-        (response) => (this.filterTails(response))
+      getListValues(this, "renditiontail").then((response) =>
+        this.filterTails(response)
       );
       this.loading = false;
+      this.rendition_id = null; // Изначально ничего не выделено
     },
     onCreateClick() {
       // Если родтитель не указан, то родитель - текущий объект
@@ -90,6 +113,19 @@ export default {
     onRowDblClick(event) {
       const host = this.$store.getters.getHostUrl;
       window.open(`${host}/${event.rendition_id}/`);
+    },
+    onRowSelect(event) {
+      this.rendition_id = event.pk;
+    },
+    onDeleteClick() {
+      // Удаляем отмеченную строку
+      this.$store
+        .dispatch("deleteData", {
+          inc_url: "rendition",
+          id: this.rendition_id,
+        })
+        // Обновление списка
+        .then(() => this.loadRenditions());
     },
   },
   watch: {

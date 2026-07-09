@@ -74,7 +74,6 @@ export default {
         url = `${url}/${inc_url}/${id}/`;
         try {
             const response = await axios.patch(url, params);
-            // console.log(response.status);
             if (response.status == 200) {
                 context.commit('setMessage', {
                     msg_icon: 'info-message',

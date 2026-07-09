@@ -5,7 +5,7 @@
       <NumberBox
         inputId="dpth"
         v-model="depth"
-        :min="1"
+        :min="0"
         :max="5"
         :precision="0"
         :spinners="true"
@@ -17,7 +17,7 @@
         selectionMode="multiple"
         @rowDblClick="onRowDblClick($event)"
       >
-        <GridColumn field="code" title="Обозначение"></GridColumn>
+        <GridColumn field="value" title="Обозначение"></GridColumn>
       </DataGrid>
     </div>
     <div class="buttons_bar" v-if="checkEdit('soundsamelist')">

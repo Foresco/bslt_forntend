@@ -55,14 +55,14 @@
           {{ files_names }}
         </FormField>
         <FormField :key="4" name="stage" label="Стадия">
-        <ComboBox
-          v-model="new_file.version_stage"
-          :data="stages"
-          valueField="pk"
-          textField="value"
-          :lazy="true"
-        ></ComboBox>
-      </FormField>
+          <ComboBox
+            v-model="new_file.version_stage"
+            :data="stages"
+            valueField="pk"
+            textField="value"
+            :lazy="true"
+          ></ComboBox>
+        </FormField>
         <FormField :key="5" name="designer" label="Разработал">
           <ComboBox
             v-model="new_file.designer"
@@ -156,7 +156,7 @@
       <GridColumn
         field="upversion"
         width="35"
-        v-if="checkEdit('objectfiles') && !all_versions"
+        v-if="checkEdit('newversionattache') && !all_versions"
       >
         <template
           slot="body"
@@ -191,6 +191,23 @@
         @click="onDeleteClick()"
         >Удалить из архива</LinkButton
       >
+      <DateBox
+        v-if="checkEdit('wmdownload')"
+        style="margin-left: 15px"
+        v-show="row_id"
+        v-model="download_watemark_date_d"
+        format="dd.MM.yyyy"
+        :firstDay="1"
+      ></DateBox>
+      <LinkButton
+        v-if="checkEdit('wmdownload')"
+        v-show="row_id"
+        style="margin-left: 5px"
+        iconCls="icon-arrow-down"
+        title="Скачать файл с меткой"
+        @click="onWmDownloadClick()"
+        >Скачать с меткой</LinkButton
+      >
     </div>
   </div>
 </template>
@@ -221,6 +238,7 @@ export default {
       version_id: null, // Идентификатор выбранной версии документа
       regime: "create", // Режим работы формы
       all_versions: false, // Признак отображения всех версий
+      download_watemark_date_d: new Date(), // Дата для скачивания с меткой
       loading: false, // Признак, что идет загрузка
     };
   },
@@ -484,6 +502,13 @@ export default {
           });
         }
       });
+    },
+    redirectToReport() {
+      // Скачивание файла с меткой
+      const host = this.$store.getters.getHostUrl;
+      let url = this.getFullUrl(); // Формируем адрес для запроса
+      window.open(`${host}/${url}`, "_self"); // Открыть в текущем окне
+      this.loading = false;
     },
   },
   watch: {

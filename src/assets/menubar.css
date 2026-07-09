@@ -375,6 +375,10 @@
     background: url('icons/file.png') no-repeat center center;
 }
 
+.down_groups {
+    background: url('icons/down_groups.png') no-repeat center center;
+}
+
 /* Дополнительные стили Базальта */
 .state_no {
 	background:url('icons/state_no.png') no-repeat center center;

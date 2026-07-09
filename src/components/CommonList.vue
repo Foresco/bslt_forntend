@@ -96,6 +96,11 @@ export default {
       type: Function,
       default(event) {},
     },
+    loadOnMount: {
+      // Обновлять ли список в момент загрузки
+      type: Boolean,
+      default: false,
+    }
   },
   computed: mapState([
     "type_key",
@@ -124,6 +129,7 @@ export default {
       params = JSON.parse(
         JSON.stringify(this.prepareFilters(pageSize, pageNumber))
       ); // JSON чтобы не происходило связывания со store и ошибок из-за этого
+
       // Если переданы дополнительные параметры - добавляем
       Object.entries(this.extra_params).forEach(([key, value]) => {
         params[key] = value;
@@ -143,6 +149,9 @@ export default {
       }
       return null;
     },
+  },
+  mounted() {
+    if (this.loadOnMount) this.loadListData(); // На случай, если список
   },
 };
 </script>

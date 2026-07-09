@@ -162,6 +162,14 @@
           >Удалить</LinkButton
         >
         <LinkButton
+          v-if="(mode == 'edit' || checkEdit('edit')) && sub_type_key == 'order'"
+          iconCls="icon-clear"
+          style="margin: 5px"
+          @click="submitFormOrderClear()"
+          >Очистить заказ</LinkButton
+        >
+        <LinkButton
+          v-if="(mode != 'create')"
           iconCls="icon-excel"
           style="margin: 5px"
           title="Вывести свойства в файл"
@@ -212,6 +220,7 @@ export default {
       staff_through: false, // Признак изменения состояний во всем составе
       base_rendition: false, // Признак отображения галочки "Включая исполнения"
       all_renditions: false, // Признак изменения состояний у всех состояний
+      sub_type_key: '' // Тип объекта состава (для объектов состава)
     };
   },
   props: {
@@ -455,6 +464,20 @@ export default {
         },
       });
     },
+    async submitFormOrderClear() {
+      this.$messager.confirm({
+        title: "Подтверждение очистки заказа",
+        msg: "Вы уверены, что все позиции заказ нужно удалить?",
+        result: (answer) => {
+          if (answer) {
+            this.$store.dispatch("postData", {
+              inc_url: 'clearorder',
+              params: {parent: this.object_id},
+            });
+          }
+        },
+      });
+    },
     async submitFormPrint() {
       // Скачивание отчета со свойствами объекта
       // Формируем адрес для запроса
@@ -487,6 +510,8 @@ export default {
     // Признаки отображения галочек
     this.show_staff_through = typeof show_staff_through != "undefined";
     this.base_rendition = typeof base_rendition != "undefined";
+    // Для объектов состава дополнительно
+    this.sub_type_key = this.$store.getters.getSubTypeKey;
     this.prepareForm();
   },
   watch: {

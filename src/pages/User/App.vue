@@ -32,11 +32,17 @@
           >
             <profile-list></profile-list>
           </TabPanel>
+          <TabPanel title="Группы контроля" v-if="checkShow('downloadcheckgroupslist')">
+            <download-check-groups-list ></download-check-groups-list>
+          </TabPanel>
           <TabPanel title="Создать" v-if="checkEdit('create')">
             <properties-form mode="create" key="create"></properties-form>
           </TabPanel>
           <TabPanel title="Редактировать" v-if="checkShow('edit')">
             <properties-form mode="edit" key="edit"></properties-form>
+          </TabPanel>
+          <TabPanel title="Лог действий" v-if="checkShow('userlog')">
+            <user-log></user-log>
           </TabPanel>
         </Tabs>
       </LayoutPanel>
@@ -107,6 +113,8 @@ import UserActivity from "@/components/UserActivity.vue";
 import PropertiesForm from "@/components/PropertiesForm.vue";
 import PropertiesFormView from "@/components/PropertiesFormView.vue";
 import HistoryLog from "@/components/HistoryLog.vue";
+import DownloadCheckGroupsList from "@/components/DownloadCheckGroupsList.vue";
+import UserLog from "@/components/UserLog.vue";
 import Status from "@/components/Status.vue";
 
 export default {
@@ -133,6 +141,8 @@ export default {
     UserGroup,
     UserActivity,
     HistoryLog,
+    DownloadCheckGroupsList,
+    UserLog,
     Status,
   },
   mounted() {
