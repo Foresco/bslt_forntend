@@ -8,6 +8,7 @@
     :onRowDblClick="onRowDblClick"
     :onSortChange="onSortChange"
   >
+    <GridColumn width="18px" :cellCss="getIcon"></GridColumn>  
     <GridColumn field="code" title="Номер заказа" width="100" :sortable="true">
       <template slot="body" slot-scope="scope">
         <a :href="scope.row.url" target="_blank">{{ scope.row.code }}</a>
@@ -75,6 +76,11 @@ export default {
     getIconM,
     getIconT,
     getBGColour,
+    getIcon(row) {
+      // Для входящих в сборку деталей отдельный стиль
+      if (row.part_type == 'detail' && row.parent_quantity > 0) return 'component';
+      return row.part_type;
+    },
     onRowSelect(event) {
       onRowSelect(event, this);
     },

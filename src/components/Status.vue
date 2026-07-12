@@ -1,6 +1,6 @@
 <template>
   <div id="stts" align="center">
-    Версия 1.1.40
+    Версия 1.1.41
     <template v-if="status.user_session_id != ''">
       Дата и время входа: {{ status.session_datetime }}. |
       Идентификатор сессии: {{ status.user_session_id }} |

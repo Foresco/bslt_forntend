@@ -23,6 +23,10 @@
     background: url('icons/complex.png') no-repeat center center;
 }
 
+.component {
+    background: url('icons/component.png') no-repeat center center;
+}
+
 .delivery {
     background: url('icons/delivery.png') no-repeat center center;
 }
