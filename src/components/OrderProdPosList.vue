@@ -6,7 +6,9 @@
         :columnResizing="true"
         selectionMode="single"
         @rowSelect="onRowSelect($event)"
-        @rowDblClick="onRowDblClick($event)"
+        :clickToEdit="true"
+        editMode="row"
+        style="height: 100%"
       >
         <GridColumn field="сk" :width="25" align="center">
           <template slot="body" slot-scope="scope">
@@ -15,7 +17,11 @@
         </GridColumn>
         <GridColumn field="parent_code" title="Заказ " width="100">
         </GridColumn>
-        <GridColumn field="child" title="Объект" width="200"></GridColumn>
+        <GridColumn field="child" title="Объект" width="200">
+          <template slot="body" slot-scope="scope">
+            <a :href="scope.row.url">{{ scope.row.child }}</a>
+          </template>
+        </GridColumn>
         <GridColumn field="quantity" title="Кол-во" width="55"></GridColumn>
         <GridColumn
           title="М"
@@ -24,6 +30,19 @@
           align="center"
         ></GridColumn>
         <GridColumn field="mater_code" title="Материал"></GridColumn>
+        <GridColumn
+          field="billet_quantity"
+          title="Заготовок"
+          :editable="true"
+          width="70"
+        >
+          <template slot="edit" slot-scope="scope">
+            <NumberBox
+              v-model="scope.row.billet_quantity"
+              :precision="0"
+            ></NumberBox>
+          </template>
+        </GridColumn>
         <GridColumn
           field="surface"
           title="Габариты обработка"
@@ -36,11 +55,14 @@
         ></GridColumn>
       </DataGrid>
     </div>
-    <div
-      class="buttons_bar"
-      v-if="checkEdit('orderprodposlist')"
-    >
-      <LinkButton iconCls="icon-no" @click="onDeleteClick()"
+    <div class="buttons_bar" v-if="checkEdit('orderprodposlist')">
+      <LinkButton iconCls="icon-save" @click="onSaveClick()"
+        >Сохранить</LinkButton
+      >
+      <LinkButton
+        iconCls="icon-no"
+        @click="onDeleteClick()"
+        style="margin-left: 5px"
         >Удалить</LinkButton
       >
       <ComboBox
@@ -86,6 +108,7 @@ export default {
           row_node["child_code"] +
           (row_node["child_title"] ? " " + row_node["child_title"] : "");
         row_node.selected = false;
+        row_node.url = `/${row_node.child_id}/`;
         return row_node;
       };
       this.list_data = []; // Очистка списка
@@ -101,10 +124,10 @@ export default {
     onRowSelect(event) {
       this.mater_state = event.mater_state_id;
     },
-    onRowDblClick(event) {
-      const host = this.$store.getters.getHostUrl;
-      window.open(`${host}/${event.child_id}/`);
-    },
+    // onRowDblClick(event) {
+    //   const host = this.$store.getters.getHostUrl;
+    //   window.open(`${host}/${event.child_id}/`);
+    // },
     onDeleteClick() {
       // Удаляем отмеченные строки
       let deleted_rows = [];
@@ -119,8 +142,27 @@ export default {
         // Обновление списка
         .then(() => this.LoadListData());
     },
+    onSaveClick() {
+      // Сохраняем количество заготовок в отмеченных строках
+      let updated_rows = [];
+      for (const q of this.list_data.filter((row) => row.selected)) {
+        updated_rows.push({
+          id: q.pk,
+          params: {
+            billet_quantity: q.billet_quantity,
+          },
+        });
+      }
+      this.$store
+        .dispatch("patchDataMany", {
+          inc_url: "orderprodposition",
+          rows: updated_rows,
+        })
+        // Обновление списка
+        .then(() => this.LoadListData());
+    },
     onSetClick() {
-      // Сохраняем отмеченные строки
+      // Устаналиваем состояние выделенных строк
       let updated_rows = [];
       for (const q of this.list_data.filter((row) => row.selected)) {
         updated_rows.push({

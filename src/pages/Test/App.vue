@@ -112,7 +112,7 @@
           <TabPanel title="Еще..." v-if="checkShow('extralinks')">
             <extra-links></extra-links>
           </TabPanel>
-          <TabPanel title="Сервис для заказа" v-if="checkShow('orderpart')">
+          <TabPanel title="Сервис для заказа" v-if="checkShow('orderpart') && checkInOrder()">
             <order-part></order-part>
           </TabPanel>
         </Tabs>
@@ -334,6 +334,13 @@
           >
             <picture-carousel></picture-carousel>
           </AccordionPanel>
+           <AccordionPanel
+            id="46"
+            title="Количество полуфабрикатов"
+            v-if="checkShow('semisquantity')"
+          >
+            <semis-quantity></semis-quantity>
+          </AccordionPanel>
         </Accordion>
       </LayoutPanel>
       <LayoutPanel region="south">
@@ -372,6 +379,7 @@ import StaffRatio from "@/components/StaffRatio.vue";
 import StaffTree from "@/components/StaffTree.vue";
 import StaffTreeSr from "@/components/StaffTreeSr.vue";
 import ProdOrderTree from "@/components/ProdOrderTree.vue";
+import OrderPart from "@/components/OrderPart.vue";
 import OperationsList from "@/components/OperationsList.vue";
 import ProdOrderPosAssign from "@/components/ProdOrderPosAssign.vue";
 import HistoryLog from "@/components/HistoryLog.vue";
@@ -405,7 +413,7 @@ import SupplyPrices from "@/components/supply/SupplyPrices.vue";
 import StaffCompare from "@/components/StaffCompare.vue";
 import DocumentTypesList from "@/components/DocumentTypesList.vue";
 import ClassificationStaff from "@/components/ClassificationStaff.vue";
-import OrderPart from "@/components/OrderPart.vue";
+import SemisQuantity from "@/components/SemisQuantity.vue";
 
 export default {
   mixins: [page, editable_component],
@@ -467,7 +475,8 @@ export default {
     StaffCompare,
     DocumentTypesList,
     ClassificationStaff,
-    OrderPart
+    OrderPart,
+    SemisQuantity,
   },
   mounted() {
     window.addEventListener("resize", this.resizeLayout, false);

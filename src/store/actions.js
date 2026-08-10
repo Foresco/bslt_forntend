@@ -56,12 +56,12 @@ export default {
             } catch (error) {
                 context.commit('setMessage', {
                     msg_icon: 'error-message',
-                    msg_text: `Ошибка выполнения post-запроса к ${row_url}`,
+                    msg_text: `Ошибка выполнения post-запроса к ${inc_url}`,
                 });
             }
         }
         // console.log(response.status);
-        if (response.status == 201) {
+        if (response && response.status == 201) {
             context.commit('setMessage', {
                 msg_icon: 'info-message',
                 msg_text: 'Данные успешно записаны',
@@ -112,7 +112,7 @@ export default {
             }
         }
         // console.log(response.status);
-        if (response.status == 200) {
+        if (response && response.status == 200) {
             context.commit('setMessage', {
                 msg_icon: 'info-message',
                 msg_text: 'Данные успешно обновлены',

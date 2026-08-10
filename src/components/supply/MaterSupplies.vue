@@ -10,7 +10,8 @@
           </template>
         </GridColumn>
         <GridColumn field="quantity" title="Кол-во" width="30"> </GridColumn>
-        <GridColumn field="supply_code" title="Снабжение" width="100"
+        <GridColumn field="billet_quantity" title="Заготовок" width="60"> </GridColumn>
+        <GridColumn field="supply_code" title="Снабжение" width="180"
           ><template slot="body" slot-scope="scope">
             <a :href="scope.row.supply_url" target="_blank">{{
               scope.row.supply_code
@@ -41,11 +42,10 @@ export default {
         parent_url: `/${row_node.parent_id}/`,
         parent_code: row_node.parent_code,
         quantity: row_node.quantity,
+        billet_quantity: row_node.billet_quantity,
         supply_url: `/${row_node.supply_id}/`,
-        supply_code: row_node.supply_order,
+        supply_code: `${row_node.supply_order} ${row_node.supply_date}`,
         billet_desc: row_node.billet_desc,
-        // mater_url: `/${row_node.mater_id}/`,
-        // mater_code: row_node.mater_code,
       };
     },
     async loadListData() {

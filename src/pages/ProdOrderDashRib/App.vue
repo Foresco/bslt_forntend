@@ -67,6 +67,9 @@
           <div title="Отгрузки" v-if="checkShow('prodorderposshipments')">
             <prod-order-pos-shipments></prod-order-pos-shipments>
           </div>
+          <div title="Входит в" v-if="checkShow('staffinto')">
+            <staff-into></staff-into>
+          </div>
       </LayoutPanel>
       <LayoutPanel region="south">
         <status></status>
@@ -90,6 +93,7 @@ import ProdOrderPosition from "@/components/ProdOrderPosition.vue";
 import ProdOrderPosOperations from "@/components/ProdOrderPosOperations.vue";
 import ProdOrderPosReports from "@/components/ProdOrderPosReports.vue";
 import ProdOrderPosShipments from "@/components/ProdOrderPosShipments.vue";
+import StaffInto from "@/components/StaffInto.vue";
 import Status from "@/components/Status.vue";
 
 export default {
@@ -106,6 +110,7 @@ export default {
     ProdOrderPosReports,
     ProdOrderPosition,
     ProdOrderPosShipments,
+    StaffInto,
     Status,
   },
   mounted() {

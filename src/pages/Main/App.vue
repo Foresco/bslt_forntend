@@ -334,6 +334,13 @@
           >
             <picture-carousel></picture-carousel>
           </AccordionPanel>
+           <AccordionPanel
+            id="46"
+            title="Количество полуфабрикатов"
+            v-if="checkShow('semisquantity')"
+          >
+            <semis-quantity></semis-quantity>
+          </AccordionPanel>
         </Accordion>
       </LayoutPanel>
       <LayoutPanel region="south">
@@ -406,6 +413,7 @@ import SupplyPrices from "@/components/supply/SupplyPrices.vue";
 import StaffCompare from "@/components/StaffCompare.vue";
 import DocumentTypesList from "@/components/DocumentTypesList.vue";
 import ClassificationStaff from "@/components/ClassificationStaff.vue";
+import SemisQuantity from "@/components/SemisQuantity.vue";
 
 export default {
   mixins: [page, editable_component],
@@ -468,6 +476,7 @@ export default {
     DocumentTypesList,
     ClassificationStaff,
     OrderPart,
+    SemisQuantity,
   },
   mounted() {
     window.addEventListener("resize", this.resizeLayout, false);
