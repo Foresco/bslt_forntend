@@ -155,6 +155,10 @@
     background: url('icons/device.png') no-repeat center center;
 }
 
+.exchange {
+    background: url('icons/exchange.png') no-repeat center center;
+}
+
 .export {
     background: url('icons/export.png') no-repeat center center;
 }

@@ -43,6 +43,12 @@
                   )
                 "
               ></ComboBox>
+              <FileButton
+                v-if="f.param_type == 'FileButton'"
+                :multiple="false"
+                v-model="params_values[f.param_name]"
+                >Выбрать...</FileButton
+              >
               <CheckBox
                 v-if="f.param_type == 'CheckBox'"
                 v-model="params_values[f.param_name]"
@@ -87,6 +93,13 @@
                 @click="submitPrint()"
                 >Сформировать</LinkButton
               >
+              <LinkButton
+                v-show="!loading"
+                iconCls="icon-print"
+                style="margin: 10px"
+                @click="submitProcess()"
+                >Выполнить</LinkButton
+              >
               <img
                 v-show="loading"
                 src="@/assets/images/preloader.gif"
@@ -106,7 +119,7 @@
 
 <script>
 // import axios from "axios";
-import { getData, dowloadFile } from "@/api/api";
+import { getData, downloadFile } from "@/api/api";
 import { getSuggest, isValidHttpUrl } from "@/api/utils";
 import { dateToStr } from "@/api/formatters";
 import { page } from "@/pages/Page/mixin.js"; // Общий функционал всех страниц
@@ -267,10 +280,8 @@ export default {
         );
         if (response.code) {
           if (fn && fn.indexOf("{%code%}") > 0)
-            fn = fn.replace(
-              "{%code%}",
-              response.code
-            ); // Если это шаблон, заменяем
+            fn = fn.replace("{%code%}", response.code);
+          // Если это шаблон, заменяем
           else fn = response.code + " " + fn; // Добавляем обозначение к названию файла
         }
       }
@@ -281,7 +292,7 @@ export default {
       const url = this.getFullUrl(); // Формируем адрес для запроса
       const file_name = await this.prepareFileName(); // Формируем имя скачиваемого файла
       // Скачиваем файл
-      dowloadFile(url, file_name, this);
+      downloadFile(url, file_name, this);
     },
     redirectToReport() {
       // Переход на соотвествующую ссылку отчета
@@ -297,6 +308,13 @@ export default {
         this.downloadReport(); // Скачиваем извне
       // Иначе отпавляем на встроенный отчет
       else this.redirectToReport();
+    },
+    submitProcess(event) {
+      // Отправка POST-запроса на обработку по указанной ссылке
+      const url = this.getFullUrl(); // Формируем адрес для запроса
+      const file_name = await this.prepareFileName(); // Формируем имя скачиваемого файла
+      // Скачиваем файл
+      downloadFile(url, file_name, this);
     },
   },
   created() {

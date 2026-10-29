@@ -192,7 +192,7 @@
 </template>
 
 <script>
-import { getData, dowloadFile } from "@/api/api";
+import { getData, downloadFile } from "@/api/api";
 import { getPropValues, getPropsList, getSuggest } from "@/api/utils";
 import { toJson } from "@/api/formatters.js";
 
@@ -486,7 +486,7 @@ export default {
       url += `/report/object_properties/get_report/?object_id=${this.object_id}&type_key=${this.type_key}&sub_type_key=${this.$store.getters.getSubTypeKey}`;
       const file_name = `${this.prop_values.code} свойства.xls`; // Формируем имя скачиваемого файла
       // Скачиваем файл
-      dowloadFile(url, file_name, this);
+      downloadFile(url, file_name, this);
     },
     afterCreate() {
       // Выполняется после создания объекта

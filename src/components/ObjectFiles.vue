@@ -125,8 +125,7 @@
       <GridColumn field="file_name" title="Файл">
         <template slot="body" slot-scope="scope">
           <a
-            :href="scope.row.url"
-            download
+            href="javascript:void(0)" v-on:click="downloadFile(scope.row.url, scope.row.file_name)"
             :title="`${scope.row.username} ${scope.row.session_datetime}`"
             >{{ scope.row.file_name }}</a
           >
@@ -214,6 +213,7 @@
 
 <script>
 import { getData } from "@/api/api";
+import {downloadFileMess } from "@/api/download_utils";
 import { getSuggest, getListValues } from "@/api/utils";
 import { bindEvents } from "@/api/dragndrop";
 import { editable_component } from "@/pages/Page/checkeditmixin.js"; // Общий функционал контроля редактирования
@@ -283,6 +283,10 @@ export default {
       }
       return null;
     },
+    downloadFile(url, fileName) {
+      // Чтобы зарегистрировать внешнюю фукнцию
+      downloadFileMess(this, url, fileName);
+    },
     async loadListData() {
       this.list_data = []; // Очистка списка
       if (this.root_id) {
@@ -343,6 +347,8 @@ export default {
         this.new_file.file_name = this.selected_files[n].name;
         this.new_file.data_format = this.selected_files[n].type || "detect"; // Если не определился, то попробуем определить на сервере
         this.new_file.watemark_date = dateToStr(this.new_file.watemark_date_d);
+        // Заполнение типа файла, если он не заполнен
+        this.new_file.doc_type ??= 1; // Вариант пустое значение
       }
       const getFormData = (object) =>
         Object.keys(object).reduce((formData, key) => {

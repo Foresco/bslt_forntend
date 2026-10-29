@@ -27,7 +27,7 @@ const getResponseId = (context) => {
     return null;
 };
 
-const dowloadFile = (url, file_name, context) => {
+const downloadFile = (url, file_name, context) => {
     // Скачивание файла по ссылке
     axios
     .get(url, { responseType: "blob" })
@@ -47,5 +47,5 @@ const dowloadFile = (url, file_name, context) => {
 };
 
 export {
-    getData, getResponseId, dowloadFile
+    getData, getResponseId, downloadFile
 };

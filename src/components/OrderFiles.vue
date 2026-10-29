@@ -98,8 +98,7 @@
       <GridColumn field="file_name" title="Файл">
         <template slot="body" slot-scope="scope">
           <a
-            :href="scope.row.url"
-            download
+            href="javascript:void(0)" v-on:click="downloadFile(scope.row.url, scope.row.file_name)"
             :title="`${scope.row.username} ${scope.row.session_datetime}`"
             >{{ scope.row.file_name }}</a
           >
@@ -139,6 +138,7 @@
 
 <script>
 import { getData } from "@/api/api";
+import {downloadFileMess } from "@/api/download_utils";
 import { getSuggest, getListValues } from "@/api/utils";
 import { bindEvents } from "@/api/dragndrop";
 import { editable_component } from "@/pages/Page/checkeditmixin.js"; // Общий функционал контроля редактирования
@@ -180,6 +180,10 @@ export default {
         design_role_id: null,
         digital_file_id: null,
       };
+    },
+    downloadFile(url, fileName) {
+      // Чтобы зарегистрировать внешнюю фукнцию
+      downloadFileMess(this, url, fileName);
     },
     parseRow(row_node) {
       const host = this.$store.getters.getHostUrl;
