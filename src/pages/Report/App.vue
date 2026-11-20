@@ -47,6 +47,7 @@
                 v-if="f.param_type == 'FileButton'"
                 :multiple="false"
                 v-model="params_values[f.param_name]"
+                @select="onFilesSelect($event, f.param_name)"
                 >Выбрать...</FileButton
               >
               <CheckBox
@@ -77,7 +78,7 @@
                 </div>
               </div>
             </FormField>
-            <FormField label="Формат отчета">
+            <FormField label="Формат отчета" v-if="report_type == 'report'">
               <ComboBox
                 v-model="params_values['output_format']"
                 valueField="pk"
@@ -87,6 +88,7 @@
             </FormField>
             <FormField>
               <LinkButton
+                v-if="report_type == 'report'"
                 v-show="!loading"
                 iconCls="icon-print"
                 style="margin: 10px"
@@ -94,6 +96,7 @@
                 >Сформировать</LinkButton
               >
               <LinkButton
+                v-if="report_type == 'processing'"
                 v-show="!loading"
                 iconCls="icon-print"
                 style="margin: 10px"
@@ -118,8 +121,7 @@
 </template>
 
 <script>
-// import axios from "axios";
-import { getData, downloadFile } from "@/api/api";
+import { getData, downloadFile, downloadFilePost } from "@/api/api";
 import { getSuggest, isValidHttpUrl } from "@/api/utils";
 import { dateToStr } from "@/api/formatters";
 import { page } from "@/pages/Page/mixin.js"; // Общий функционал всех страниц
@@ -136,6 +138,7 @@ export default {
       params_values: {
         output_format: "PDF", // Формат отчета по умолчанию
       }, // Словарь со значениями свойств
+      selected_files: [], // Выбранные для добавления файлы
       params_fields: [], // Список с перечнем полей формы
       ref_data: {}, // Данные для справочных полей подстановки
       list_keys: {}, // Дополнительные ключи для отбора значений в полях подстановки
@@ -149,7 +152,7 @@ export default {
       loading: false, // Признак протекания загрузки отчета
       object_field: null,
       object_id: null, // Идентификатор объекта, на который формируется отчет
-      // code: "", // Обозначение объекта, на который формируется отчет
+      report_type: "report", // Тип модуля отчета (report - отчет, processing - обработка)
     };
   },
   components: {
@@ -236,7 +239,7 @@ export default {
       // Для надежного обновления данных в компоненте
       this.ref_data = Object.assign({}, this.ref_data);
     },
-    getFullUrl() {
+    getFullUrl(skip_params = false) {
       // Формирование полного адреса запроса к отчету (с параметрами)
       let full_url = "";
       let par = (key, value) => {
@@ -254,19 +257,31 @@ export default {
         const status = this.$store.getters.getStatus;
         full_url += `&val[session]=${status["user_session_id"]}`;
       } else {
-        full_url = `report/${this.report_name}/get_report/?`; // Адрес во внутренней системе генерации отчетов
+        if (this.report_type == "processing")
+          full_url = `processing/${this.report_name}/processing_do/`; // Адрес во внутренней системе выполнения обработок
+        else full_url = `report/${this.report_name}/get_report/?`; // Адрес во внутренней системе генерации отчетов
       }
-      // Наполнение параметрами запроса
-      Object.entries(this.params_values).forEach(([key, value]) => {
-        if (value) {
-          // Заполняем только параметры, имеющие значения
-          if (value instanceof Date) {
-            // Приведение даты к нужному формату (31.12.2021)
-            full_url += par(key, dateToStr(value));
-          } else full_url += par(key, value);
-        }
-      });
+      // Наполнение параметрами запроса только для отчета
+      if (!skip_params)
+        Object.entries(this.params_values).forEach(([key, value]) => {
+          if (value) {
+            // Заполняем только параметры, имеющие значения
+            if (value instanceof Date) {
+              // Приведение даты к нужному формату (31.12.2021)
+              full_url += par(key, dateToStr(value));
+            } else full_url += par(key, value);
+          }
+        });
       return full_url;
+    },
+    onFilesSelect(event, param_name) {
+      // Обработка события выбора файлов
+      // console.log(event);
+      // console.log(this.params_values);
+      // this.selected_files = this.selected_files.concat(event); // Запоминаем выбранные файлы
+      console.log(event);
+      console.log(event[0]);
+      this.params_values[param_name] = event[0];
     },
     async prepareFileName() {
       // Формирование имени загружаемого файла
@@ -309,12 +324,25 @@ export default {
       // Иначе отпавляем на встроенный отчет
       else this.redirectToReport();
     },
-    submitProcess(event) {
+    async submitProcess(event) {
       // Отправка POST-запроса на обработку по указанной ссылке
-      const url = this.getFullUrl(); // Формируем адрес для запроса
-      const file_name = await this.prepareFileName(); // Формируем имя скачиваемого файла
-      // Скачиваем файл
-      downloadFile(url, file_name, this);
+      const url = this.getFullUrl(true); // Формируем адрес для запроса (без параметров)
+      const host = this.$store.getters.getHostUrl;
+      const getFormData = (object) =>
+        Object.keys(object).reduce((formData, key) => {
+          formData.append(key, object[key]);
+          return formData;
+        }, new FormData());
+      // Преобразование параметров в форму
+      const form = getFormData(this.params_values);
+      // const file_name = await this.prepareFileName(); // Формируем имя скачиваемого файла
+      // Скачиваем файл через POST
+      downloadFilePost(
+        `${host}/${url}`,
+        form,
+        "import.txt",
+        this
+      );
     },
   },
   created() {
@@ -331,7 +359,8 @@ export default {
     }
     // Если в параметрах формирования передан идентификатор объекта
     if (typeof object_id != "undefined") this.object_id = object_id;
-
+    // Тип модуля отчета
+    if (typeof report_type != "undefined") this.report_type = report_type;
     this.prepareForm();
   },
 };

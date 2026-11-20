@@ -21,6 +21,9 @@
           <TabPanel title="Поставки материалов" v-if="checkShow('supplymaterslist')">
             <supply-maters-list></supply-maters-list>
           </TabPanel>
+          <TabPanel title="Отгрузки" v-if="checkShow('shipmentslist')">
+            <shipments-list></shipments-list>
+          </TabPanel>
         </Tabs>
       </LayoutPanel>
       <LayoutPanel
@@ -37,8 +40,11 @@
           class="f-full"
           :border="false"
         >
-          <AccordionPanel id="10" title="Фильтры">
+          <AccordionPanel id="10" title="Фильтры" v-if="checkShow('filters')">
             <list-filters></list-filters>
+          </AccordionPanel>
+          <AccordionPanel id="10" title="Фильтры" v-if="checkShow('shipmentfilters')">
+            <shipment-filters></shipment-filters>
           </AccordionPanel>
           <AccordionPanel id="20" title="Комментарии" v-if="checkShow('objectcomments')">
             <object-comments></object-comments>
@@ -88,11 +94,13 @@ import ProdOrderInWorkList from "@/components/ProdOrderInWorkList.vue";
 import ProdOrderMatersList from "@/components/ProdOrderMatersList.vue";
 import SupplyMatersList from "@/components/SupplyMatersList.vue";
 import ListFilters from "@/components/ListFilters.vue";
+import ShipmentFilters from "@/components/shipment/ShipmentFilters.vue";
 import ObjectComments from "@/components/ObjectComments.vue";
 import ProdOrderPosition from "@/components/ProdOrderPosition.vue";
 import ProdOrderPosOperations from "@/components/ProdOrderPosOperations.vue";
 import ProdOrderPosReports from "@/components/ProdOrderPosReports.vue";
 import ProdOrderPosShipments from "@/components/ProdOrderPosShipments.vue";
+import ShipmentsList from "@/components/shipment/ShipmentsList.vue";
 import StaffInto from "@/components/StaffInto.vue";
 import Status from "@/components/Status.vue";
 
@@ -105,11 +113,13 @@ export default {
     ProdOrderMatersList,
     SupplyMatersList,
     ListFilters,
+    ShipmentFilters,
     ObjectComments,
     ProdOrderPosOperations,
     ProdOrderPosReports,
     ProdOrderPosition,
     ProdOrderPosShipments,
+    ShipmentsList,
     StaffInto,
     Status,
   },

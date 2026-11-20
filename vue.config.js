@@ -121,7 +121,7 @@ module.exports = {
       entry: 'src/pages/Test2/main.js',
       template: 'public/test2.html',
       filename: 'test2.html',
-      chunks: [ 'chunk-vendors', 'chunk-common', 'archive' ]
+      chunks: [ 'chunk-vendors', 'chunk-common', 'report' ]
     }
   },
   // Сборка в продакшн варианте

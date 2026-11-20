@@ -28,7 +28,7 @@ const getPropsList = async (context, type_key, sub_type_key) => {
     }
 };
 
-const getSuggest = async (context, type_key, filter, params = {}) => {
+const getSuggest = async (context, type_key, filter = '', params = {}) => {
     // Получение списка значений для подстановки
     try {
         // Добавляем значения в переданные дополнительные параметры

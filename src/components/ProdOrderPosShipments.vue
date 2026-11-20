@@ -95,7 +95,7 @@ export default {
       this.list_data = []; // Очистка списка
       if (this.link_id) {
         this.loading = true;
-        this.list_data = await getData(this, "shipment", {
+        this.list_data = await getData(this, "shipment/", {
           prod_order_link: this.link_id,
         });
         this.loading = false;

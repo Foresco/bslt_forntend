@@ -42,17 +42,18 @@ export default {
       row_node.prod_order_url = `/${row_node.prod_order_id}/`;
       row_node.state = "closed";
       row_node.iconCls = row_node.type_key;
-      if (row_node.title)
-        row_node.code = row_node.code + " " + row_node.title;
+      if (row_node.title) row_node.code = row_node.code + " " + row_node.title;
       return row_node;
     },
     getRootRows() {
       // Получение корневых строк
-      getData(this, `parents/${this.selected_id}`, { root: true }).then(
-        (rows) => {
-          this.tree_data = rows.map(this.parseRow);
-        }
-      );
+      if (this.selected_id) {
+        getData(this, `parents/${this.selected_id}`, { root: true }).then(
+          (rows) => {
+            this.tree_data = rows.map(this.parseRow);
+          }
+        );
+      }
     },
     onRowExpand(event) {
       // Раскрытие ветки дерева
